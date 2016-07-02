@@ -1,14 +1,16 @@
 import {Component} from '@angular/core';
 import {ExchangeService} from "./exchange.service";
 import {CurrencySelectComponent} from "./currency.select.component";
+import {FixedPipe} from "./fixed.pipe";
 
 @Component({
     selector: 'currency-converter',
     directives: [CurrencySelectComponent],
+    pipes: [FixedPipe],
     template: `
         <input type="number" [(ngModel)]="baseAmount" [class.error]="isInvalid(baseAmount)">
         <currency-select [(selected)]="baseCurrency"></currency-select>
-       = <strong>{{ targetAmount | number:'1.2-2' }}</strong>
+       = <strong>{{ targetAmount | fixed }}</strong>
        <currency-select [(selected)]="targetCurrency"></currency-select>
          <p *ngIf="isInvalid(baseAmount)">Please Enter a Valid Amount</p>
        
@@ -18,7 +20,7 @@ import {CurrencySelectComponent} from "./currency.select.component";
         width:10ex;
         text-align: right;
         }
-        .error{
+        .error {
         background-color:#ff6666;
         }
 `],
