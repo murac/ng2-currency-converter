@@ -1,14 +1,18 @@
 import {Component} from '@angular/core';
 import {ExchangeService} from "./exchange.service";
+import {CurrencySelectComponent} from "./currency.select.component";
 
 @Component({
     selector: 'currency-converter',
+    directives: [CurrencySelectComponent],
     template: `
-        <h1>Currency Converter</h1>
-        Convert: <input type="number" [(ngModel)]="baseAmount" [ngClass]="{error: isInvalid(baseAmount)}">
-        <p>
-        <strong>{{baseAmount}}</strong> {{baseCurrency}} = <strong>{{targetAmount}}</strong>{{targetCurrency}}
-        </p>
+        <input type="number" [(ngModel)]="baseAmount" [ngClass]="{error: isInvalid(baseAmount)}">
+        <currency-select [selected]="baseCurrency"></currency-select>
+       = <strong>{{targetAmount}}</strong>
+       <currency-select [(selected)]="targetCurrency"></currency-select>
+       <p>
+       ({{baseCurrency}} to {{targetCurrency}})
+</p>
 `,
     styles: [`
         input[type=number]{
@@ -37,5 +41,9 @@ export class AppComponent {
 
     isInvalid(value) {
         return !Number.isFinite(value);
+    }
+
+    onSetClick(event){
+        console.log(event);
     }
 }
