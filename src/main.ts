@@ -7,4 +7,4 @@ import 'zone.js/dist/zone';
 import {bootstrap} from '@angular/platform-browser-dynamic';
 import {AppComponent} from './app/app.component.ts';
 
-bootstrap(<any>AppComponent);
+bootstrap(AppComponent);
