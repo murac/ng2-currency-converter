@@ -8,10 +8,10 @@ import {CurrencySelectComponent} from "./currency.select.component";
     template: `
         <input type="number" [(ngModel)]="baseAmount" [class.error]="isInvalid(baseAmount)">
         <currency-select [(selected)]="baseCurrency"></currency-select>
-       = <strong>{{targetAmount}}</strong>
+       = <strong>{{ targetAmount | number:'1.2-2' }}</strong>
        <currency-select [(selected)]="targetCurrency"></currency-select>
-       <p>
-</p>
+         <p *ngIf="isInvalid(baseAmount)">Please Enter a Valid Amount</p>
+       
 `,
     styles: [`
         input[type=number]{
@@ -25,6 +25,7 @@ import {CurrencySelectComponent} from "./currency.select.component";
     providers: [ExchangeService]
 })
 export class AppComponent {
+    now = Date.now();
     baseCurrency = "USD";
     targetCurrency = "GBP";
     baseAmount = 1;
