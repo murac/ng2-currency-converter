@@ -6,12 +6,11 @@ import {CurrencySelectComponent} from "./currency.select.component";
     selector: 'currency-converter',
     directives: [CurrencySelectComponent],
     template: `
-        <input type="number" [(ngModel)]="baseAmount" [ngClass]="{error: isInvalid(baseAmount)}">
-        <currency-select [selected]="baseCurrency"></currency-select>
+        <input type="number" [(ngModel)]="baseAmount" [class.error]="isInvalid(baseAmount)">
+        <currency-select [(selected)]="baseCurrency"></currency-select>
        = <strong>{{targetAmount}}</strong>
        <currency-select [(selected)]="targetCurrency"></currency-select>
        <p>
-       ({{baseCurrency}} to {{targetCurrency}})
 </p>
 `,
     styles: [`
@@ -41,9 +40,5 @@ export class AppComponent {
 
     isInvalid(value) {
         return !Number.isFinite(value);
-    }
-
-    onSetClick(event){
-        console.log(event);
     }
 }
