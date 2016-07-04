@@ -11,14 +11,18 @@ import {ExchangeService} from "./exchange.service";
         </select>
 `
 })
-export class CurrencySelectComponent {
+export class CurrencySelectComponent{
     @Input() selected:string;
     @Output() selectedChange = new EventEmitter();
 
     supportedCurrencies = [];
 
-    constructor(exchangeService:ExchangeService) {
+    constructor(private exchangeService:ExchangeService) {
         this.supportedCurrencies = exchangeService.supportedCurrencies;
+        if(exchangeService.supportedCurrencies===null){
+            exchangeService.getSupported().then(supportedCurrencies=>this.supportedCurrencies=supportedCurrencies);
+        }
+
     }
 
     onSelectedChange(selected:string) {

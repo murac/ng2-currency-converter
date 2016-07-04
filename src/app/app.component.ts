@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ExchangeService} from "./exchange.service";
 import {CurrencySelectComponent} from "./currency.select.component";
 import {FixedPipe} from "./fixed.pipe";
+import {HTTP_PROVIDERS} from "@angular/http";
 
 @Component({
     selector: 'currency-converter',
@@ -24,7 +25,7 @@ import {FixedPipe} from "./fixed.pipe";
         background-color:#ff6666;
         }
 `],
-    providers: [ExchangeService]
+    providers: [ExchangeService, HTTP_PROVIDERS]
 })
 export class AppComponent {
     now = Date.now();
